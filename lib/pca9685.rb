@@ -1,4 +1,4 @@
-require "Pca9685/version"
+require "pca9685/version"
 require 'i2c_tools'
 
 class Pca9685

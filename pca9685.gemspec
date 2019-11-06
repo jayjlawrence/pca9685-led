@@ -1,7 +1,7 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "Pca9685/version"
+require "pca9685/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "pca9685"
