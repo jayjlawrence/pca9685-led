@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    Pca9685 (0.1.0)
+    pca9685 (0.1.0)
       mixlib-shellout
 
 GEM
@@ -28,8 +28,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  Pca9685!
   bundler (~> 1.17)
+  pca9685!
   rake (~> 10.0)
   rspec (~> 3.0)
 

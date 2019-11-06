@@ -7,8 +7,6 @@ class Pca9685
 
   include I2cTools
 
-  attr :addr
-
   def register_mode1
     0
   end
@@ -49,11 +47,11 @@ class Pca9685
   #def led_all(intensity)
   #end
 
-  def led_set(led = 0, intensity = 0)
+  def led_set(led: 0, intensity: 0, address: nil)
     value_on, value_off = led_on_off(led, intensity)
-    puts ["led", led, "intensity", intensity, "led on", value_on, "led off", value_off].join(' ')
-    i2c_set_word(1, @addr, led_register_on, value_on)
-    i2c_set_word(1, @addr, led_register_off, value_off)
+    puts ["address", address, "led", led, "intensity", intensity, "led on", value_on, "led off", value_off].join(' ')
+    i2c_set_word(address, led_register_on, value_on)
+    i2c_set_word(address, led_register_off, value_off)
   end
 
   def freq_set(freq)

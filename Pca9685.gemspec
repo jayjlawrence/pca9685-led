@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "Pca9685/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "Pca9685"
+  spec.name          = "pca9685"
   spec.version       = Pca9685::VERSION
   spec.authors       = ["Jay Lawrence"]
   spec.email         = ["jayjlawrence70@gmail.com"]
 
   spec.summary       = %q{Set PCA9685 PWM values for controlling LED intensities using ic2tools.}
   spec.description   = %q{Set PCA9685 PWM values for controlling LED intensities using ic2tools.}
-  spec.homepage      = "https://github.com/jayjlawrence/pca9685"
+  spec.homepage      = "https://github.com/jayjlawrence/pca9685-led"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "https://github.com/jayjlawrence/pca8695"
+    spec.metadata["source_code_uri"] = "https://github.com/jayjlawrence/pca8695-led"
     #spec.metadata["changelog_uri"] = "https://github.com/jayjlawrence/pca8695/changelog"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
