@@ -16,10 +16,11 @@ module I2cTools
   def i2c_set_word(bus=1, addr, register, value)
     i2c_cmd=Mixlib::ShellOut.new("/usr/sbin/i2cset", "-y", bus.to_s, hexb(addr), hexb(register), hexw(value), 'w', timeout: 2)
     i2c_cmd.logger(logger) if logger
-    STDERR.puts i2c_cmd.command if debug
+    STDERR.puts i2c_cmd.command.join(' ') if debug
     unless dryrun
       i2c_cmd.run_command
       if i2c_cmd.error!
+        STDERR.puts "Error running i2c command"
         STDERR.puts i2c_cmd.stdout
         STDERR.puts i2c_cmd.stderr
       end
