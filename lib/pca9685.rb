@@ -50,8 +50,8 @@ class Pca9685
   def led_set(led: 0, intensity: 0, address: nil)
     value_on, value_off = led_on_off(led, intensity)
     puts ["address", address, "led", led, "intensity", intensity, "led on", value_on, "led off", value_off].join(' ')
-    i2c_set_word(address, led_register_on, value_on)
-    i2c_set_word(address, led_register_off, value_off)
+    i2c_set_word(address, register_led_on, value_on)
+    i2c_set_word(address, register_led_off, value_off)
   end
 
   def freq_set(freq)
