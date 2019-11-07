@@ -46,8 +46,8 @@ module I2cTools
   def i2c_set_lh_bytes(bus = 1, addr, register, value)
     low = value % 256
     high = (value - low) / 256
-    i2c_set_2bytes(bus, addr, register, low)
-    i2c_set_2bytes(bus, addr, register+1, high)
+    i2c_set_byte(bus, addr, register, low)
+    i2c_set_byte(bus, addr, register+1, high)
   end
 
 end
