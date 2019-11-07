@@ -47,11 +47,11 @@ class Pca9685
   #def led_all(intensity)
   #end
 
-  def led_set(led: 0, intensity: 0, address: nil)
+  def led_set(led:, intensity:, address:)
     value_on, value_off = led_on_off(led, intensity)
     # puts ["address", address, "led", led, "intensity", intensity, "led on", value_on, "led off", value_off].join(' ')
-    result_on = i2c_set_lh_bytes(address, register_led_on, value_on)
-    result_off = i2c_set_lh_bytes(address, register_led_off, value_off)
+    result_on = i2c_set_lh_bytes(address, register_led_on(led), value_on)
+    result_off = i2c_set_lh_bytes(address, register_led_off(led), value_off)
     result_on && result_off
   end
 
