@@ -1,10 +1,7 @@
 require 'mixlib/shellout'
 
 module I2cTools
-
-  class << self
-    attr_accessor :debug, :dryrun, :logger
-  end
+  attr_accessor :debug, :dryrun, :logger
 
   def hexb(val)
     sprintf "0x%02x", val
@@ -17,9 +14,9 @@ module I2cTools
 
   def i2c_set_word(bus = 1, addr, register, value)
     i2c_cmd = Mixlib::ShellOut.new("/usr/sbin/i2cset", "-y", bus.to_s, hexb(addr), hexb(register), hexw(value), 'w', timeout: 2)
-    i2c_cmd.logger(self.logger) if self.logger
-    STDERR.puts i2c_cmd.command.join(' ') if self.debug
-    unless self.dryrun
+    i2c_cmd.logger(logger) if logger
+    STDERR.puts i2c_cmd.command.join(' ') if debug
+    unless dryrun
       i2c_cmd.run_command
       if i2c_cmd.error!
         STDERR.puts "Error running i2c command"
@@ -27,14 +24,14 @@ module I2cTools
         STDERR.puts i2c_cmd.stderr
       end
     end
-    self.dryrun || !i2c_cmd.error! ? i2c_cmd.command : nil
+    dryrun || !i2c_cmd.error! ? i2c_cmd.command : nil
   end
 
   def i2c_set_byte(bus = 1, addr, register, value)
     i2c_cmd = Mixlib::ShellOut.new("/usr/sbin/i2cset", "-y", bus.to_s, hexb(addr), hexb(register), hexb(value), 'b', timeout: 2)
-    i2c_cmd.logger(self.logger) if self.logger
-    STDERR.puts i2c_cmd.command.join(' ') if self.debug
-    unless self.dryrun
+    i2c_cmd.logger(logger) if logger
+    STDERR.puts i2c_cmd.command.join(' ') if debug
+    unless dryrun
       i2c_cmd.run_command
       if i2c_cmd.error!
         STDERR.puts "Error running i2c command"
@@ -42,7 +39,7 @@ module I2cTools
         STDERR.puts i2c_cmd.stderr
       end
     end
-    self.dryrun || !i2c_cmd.error! ? i2c_cmd.command : nil
+    dryrun || !i2c_cmd.error! ? i2c_cmd.command : nil
   end
 
   def i2c_set_lh_bytes(bus = 1, addr, register, value)
