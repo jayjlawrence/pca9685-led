@@ -62,9 +62,9 @@ class Pca9685
   end
 
   def freq_set(address, freq)
-    mode_sleep
+    mode_sleep(address)
     result_sleep = i2c_set_byte(address, 0xfe, 0x65)
-    mode_normal
+    mode_normal(address)
   end
 
 end
