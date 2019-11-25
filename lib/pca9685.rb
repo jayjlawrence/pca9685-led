@@ -30,19 +30,25 @@ class Pca9685
     [delay, (delay + intensity)%4096]
   end
 
-  #def reset
-  #  execute ["/usr/sbin/i2cset", "-y", "1", hexb(@addr), hexb(register_mode2), hexb(0x04), 'b'].join(' ')
-  #  mode_normal
-  #end
+  def reset(address)
+    result_reset = i2c_set_byte(address, 0xfa, 0)
+    result_reset = i2c_set_byte(address, 0xfb, 0)
+    result_reset = i2c_set_byte(address, 0xfc, 0)
+    result_reset = i2c_set_byte(address, 0xfd, 0)
+    result_reset = i2c_set_byte(address, register_mode2, 0x04)
+    result_reset = i2c_set_byte(address, register_mode1, 0x01)
+    result_reset = i2c_set_byte(address, register_mode1, 0x01)
+  end
 
 
-  #def mode_sleep
-  #  execute ["/usr/sbin/i2cset", "-y", "1", "-m", "0x10", hexb(@addr), hexb(register_mode1), hexb(0x10), 'b'].join(' ')
-  #end
+  def mode_sleep(address)
+    result_sleep = i2c_set_byte(address, register_mode1, 0x11)
+  end
 
-  #def mode_normal
-  #  execute ["/usr/sbin/i2cset", "-y", "1", "-m", "0x10", hexb(@addr), hexb(register_mode1), hexb(0x00), 'b'].join(' ')
-  #end
+  def mode_normal(address)
+    result_sleep = i2c_set_byte(address, register_mode1, 0x01)
+    result_sleep = i2c_set_byte(address, register_mode1, 0x81)
+  end
 
   #def led_all(intensity)
   #end
@@ -55,9 +61,9 @@ class Pca9685
     result_on && result_off
   end
 
-  def freq_set(freq)
+  def freq_set(address, freq)
     mode_sleep
-    pre_scale = (25000000 / 4096 * freq).to_i - 1
+    result_sleep = i2c_set_byte(address, 0xfe, 0x65)
     mode_normal
   end
 
