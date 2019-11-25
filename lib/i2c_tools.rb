@@ -17,7 +17,7 @@ module I2cTools
 
   def i2c_set_word(bus = 1, addr, register, value)
     i2c_cmd = Mixlib::ShellOut.new("/usr/sbin/i2cset", "-y", bus.to_s, hexb(addr), hexb(register), hexw(value), 'w', timeout: 2)
-    i2c_cmd.logger(logger) if self.logger
+    i2c_cmd.logger(self.logger) if self.logger
     STDERR.puts i2c_cmd.command.join(' ') if self.debug
     unless self.dryrun
       i2c_cmd.run_command
@@ -32,7 +32,7 @@ module I2cTools
 
   def i2c_set_byte(bus = 1, addr, register, value)
     i2c_cmd = Mixlib::ShellOut.new("/usr/sbin/i2cset", "-y", bus.to_s, hexb(addr), hexb(register), hexb(value), 'b', timeout: 2)
-    i2c_cmd.logger(logger) if self.logger
+    i2c_cmd.logger(self.logger) if self.logger
     STDERR.puts i2c_cmd.command.join(' ') if self.debug
     unless self.dryrun
       i2c_cmd.run_command
