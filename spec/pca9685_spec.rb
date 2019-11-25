@@ -8,6 +8,24 @@ RSpec.describe Pca9685 do
     @pca.dryrun=true
   end
 
+  describe "#register_led_on" do
+    it "produces correct register for on led 0" do
+      expect(@pca.register_led_on(0)).to eq(6)
+    end
+    it "produces correct register for on led 1" do
+      expect(@pca.register_led_on(1)).to eq(10)
+    end
+  end
+
+  describe "#register_led_off" do
+    it "produces correct register for off led 0" do
+      expect(@pca.register_led_off(0)).to eq(8)
+    end
+    it "produces correct register for off led 1" do
+      expect(@pca.register_led_off(1)).to eq(12)
+    end
+  end
+
   describe "#led_on_off" do
     it "is correct for led 0 intensity 0" do
       expect(@pca.led_on_off(0,0)).to eq([0,0])
@@ -52,7 +70,7 @@ RSpec.describe Pca9685 do
       expect(@pca.i2c_set_word(1, 0x40, 0x06, 1)).to eq( ["/usr/sbin/i2cset", "-y", "1", "0x40", "0x06", "0x0001", "w"])
     end
     it "makes a valid shell command for intensity 4095" do
-      expect(@pca.i2c_set_word(1, 0x40, 0x06, 4095)).to eq( ["/usr/sbin/i2cset", "-y", "1", "0x40", "0x06", "0x0FFF", "w"])
+      expect(@pca.i2c_set_word(1, 0x40, 0x06, 4095)).to eq( ["/usr/sbin/i2cset", "-y", "1", "0x40", "0x06", "0x0fff", "w"])
     end
   end
 end
