@@ -70,7 +70,7 @@ RSpec.describe Pca9685 do
       expect(@pca.i2c_set_word(1, 0x40, 0x06, 1)).to eq( ["/usr/sbin/i2cset", "-y", "1", "0x40", "0x06", "0x0001", "w"])
     end
     it "makes a valid shell command for intensity 4095" do
-      expect(@pca.i2c_set_word(1, 0x40, 0x06, 4095)).to eq( ["/usr/sbin/i2cset", "-y", "1", "0x40", "0x06", "0x0fff", "w"])
+      expect(@pca.i2c_set_word(1, 0x40, 0x06, 4095)).to eq( ["/usr/sbin/i2cset", "-y", "1", "0x40", "0x06", "0x0FFF", "w"])
     end
   end
 end
